@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Order Details</h1>
+            {% for order in orders %}
+            <p>{{order.user}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
