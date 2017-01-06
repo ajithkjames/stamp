@@ -5,7 +5,7 @@ from orders.forms import LoginForm
 from orders.views import Signup
 
 urlpatterns = [
- 	url(r'^', include('orders.urls')),
+ 	url(r'^$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm,'redirect_authenticated_user': True},name='login'),
     url(r'^orders/', include('orders.urls')),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm,'redirect_authenticated_user': True},name='login'), 
     # url(r'^login/', auth_views.login, name='login',

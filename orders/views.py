@@ -1,20 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import OrderDetail
 from django.views.generic import View
 from django.shortcuts import redirect
-from orders.models import User
-from django.contrib.auth import login
-
-
-def index(request):
-	return HttpResponse("Hello, world. You're at the polls index.")
-
-@login_required(login_url="login/")
-def home(request):
-	orders=OrderDetail.objects.all()
-	return render(request,'home.html', {'orders': orders})
+# from orders.models import User
+# from django.contrib.auth import login
 
 class Signup(View):
     template_name = "signup.html"
@@ -37,3 +28,17 @@ class Signup(View):
         except:
             pass
         return redirect('/')
+
+@login_required(login_url="login/")
+def home(request):
+	orders=OrderDetail.objects.all()
+	return render(request,'home.html', {'orders': orders})
+
+
+def details(request,order_id):
+	try:
+		order=OrderDetail.objects.get(pk=order_id)
+	except OrderDetail.DoesNotExist:
+		raise Http404("No such order")
+	return render(request,'order-details.html', {'order': order})
+

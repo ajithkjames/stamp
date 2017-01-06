@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container">
-    <div class="row">
-        <div class="jumbotron">
-            <h1>Order Details</h1>
-            {% for order in orders %}
-            <p>{{order.user}}</p>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+{% if orders %}
+	<div class="container">
+	    <div class="row">
+	        <div class="jumbotron">
+	            <h1>Orders</h1>
+	            {% for order in orders %}
+	            <a href="{{order.id}}">
+	            <p>{{order.stamp_type}}&nbsp-{{order.user.first_name}}</p>
+	            {% endfor %}
+	            </a>
+	        </div>
+	    </div>
+	</div>
+{% else %}
+	<h3>No orders yet!!</h3>
+{%endif%}
 {% endblock %}

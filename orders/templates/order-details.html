@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if order %}
+	<div class="container">
+	    <div class="row">
+	        <div class="jumbotron">
+	            <h1>Order Details</h1>
+	        	<p>Ordering Person: {{order.user.first_name}} &nbsp{{order.user.last_name}} </p>
+	            <p>{{order.get_size_display}}</p>
+	            <p>{{order.type}}</p>
+	            <p>{{order.font}}</p>
+	            <p>{{order.color}}</p>
+	            <p>{{order.allignment}}</p>
+	            <p>{{order.rate}}</p>
+	            <p>{{order.quantity}}</p>
+	            <p>{{order.request}}</p>
+	            <p>{{order.advance}}</p>
+	            <p>{{order.delivery_date}}</p>
+	       
+	           
+	        </div>
+	    </div>
+	</div>
+{% else %}
+	<h3>No data!!</h3>
+{%endif%}
+{% endblock %}
