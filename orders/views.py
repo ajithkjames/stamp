@@ -12,26 +12,26 @@ from orders.models import User
 from django.contrib.auth import login
 
 class Signup(View):
-    template_name = "signup.html"
-    def __init__(self, **kwargs):
-        pass
+	template_name = "signup.html"
+	def __init__(self, **kwargs):
+		pass
 
-    def get(self, request):
-        return render(request, self.template_name)
-    
-    def post(self, request):
-        try:
-            first_name = request.POST.get("first_name")
-            last_name = request.POST.get("last_name")
-            email = request.POST.get("email")
-            raw_password = request.POST.get("password")
-            new_user = User.objects.create_user(email, first_name= first_name, last_name = last_name, email = email)
-            new_user.set_password(raw_password)
-            new_user.save()
-            login(self.request, new_user)
-        except:
-            return redirect('/')
-        return redirect('/')
+	def get(self, request):
+		return render(request, self.template_name)
+	
+	def post(self, request):
+		try:
+			first_name = request.POST.get("first_name")
+			last_name = request.POST.get("last_name")
+			email = request.POST.get("email")
+			raw_password = request.POST.get("password")
+			new_user = User.objects.create_user(email, first_name= first_name, last_name = last_name, email = email)
+			new_user.set_password(raw_password)
+			new_user.save()
+			login(self.request, new_user)
+		except:
+			return redirect('/')
+		return redirect('/')
 
 # @login_required(login_url="login/")
 class HomeView(LoginRequiredMixin, generic.ListView):
@@ -51,21 +51,19 @@ class DetailsView(LoginRequiredMixin, generic.DetailView):
 	template_name= 'order-details.html'
 
 def create_order(request):
-    if not request.user.is_authenticated():
-        return render(request, '/')
-    else:
-    	form = OrderDetailForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
-        	orderdetail = form.save(commit=False)
-        	print orderdetail
-        	orderdetail.user = request.user
-        	# print orderdetail.user
-        	orderdetail.save()
-        	return redirect('/')
-        context = {
-            "form": form,
-        }
-        return render(request, 'createorder.html', context)
+	if not request.user.is_authenticated():
+		return render(request, '/')
+	else:
+		form = OrderDetailForm(request.POST or None, request.FILES or None)
+		if form.is_valid():
+			orderdetail = form.save(commit=False)
+			orderdetail.user = request.user
+			orderdetail.save()
+			return redirect('/')
+		context = {
+			"form": form,
+		}
+		return render(request, 'createorder.html', context)
 
 
 
