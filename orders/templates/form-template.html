@@ -3,16 +3,17 @@
 {% block content %}
 {% load material_form %} 
 <div class="row valign">
-    <div class="col s8 m8 offset-m3 l6 offset-l3">
-<form method="POST" >
+    <div class="col s8 offset-s2 m8 offset-m2 l6 offset-l3">
+		<form method="POST" >
 
-        {% csrf_token %}
-        {% form form=form %}{% endform %}
+	        {% csrf_token %}
+	        {% form form=form %}{% endform %}
 
-      <div style="text-align:center">
-         <button class="btn waves-effect waves-red z-depth-5 indigo" type="submit">submit</button>
-</div>
-</div>
+	      	<div style="text-align:center">
+	        	<button class="btn waves-effect waves-red z-depth-5 indigo" type="submit">submit</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 {% endblock %}
