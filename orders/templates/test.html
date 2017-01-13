@@ -1,0 +1,37 @@
+class="btn waves-effect waves-red z-depth-5"
+<button class="waves-effect waves-light btn" type="submit">submit</button>
+
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% load material_form %} 
+<div class="row valign">
+    <div class="col s8 m8 offset-m3 l6 offset-l3">
+<form method="POST" >
+
+        {% csrf_token %}
+        {% form form=form %}{% endform %}
+
+      <div style="text-align:center">
+         <button class="btn waves-effect waves-red z-depth-5 indigo" type="submit">submit</button>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% load material_form %} 
+{% for field in form %}
+	{% form form=form %}{% endform %}
+{% endfor %}
+{% endblock %}

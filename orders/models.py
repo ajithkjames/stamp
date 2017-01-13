@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
 from datetime import datetime, timedelta
+from django.core.urlresolvers import reverse
 
 SIZE_CHOICES = (
         (0, 'small'),
@@ -41,7 +42,7 @@ class Profile(DateMixin):
 
 class OrderDetail(DateMixin):
 
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     stamp_type = models.CharField(max_length=1000, null=True, blank=True)
     size = models.IntegerField(choices=SIZE_CHOICES, null=True, blank=True)
     font = models.CharField(max_length=1000, null=True, blank=True)
@@ -49,9 +50,12 @@ class OrderDetail(DateMixin):
     allignment = models.CharField(max_length=1000, null=True, blank=True)
     rate = models.IntegerField(null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
-    request = models.CharField(max_length=1000, null=True, blank=True)
+    spcl_request = models.CharField(max_length=1000, null=True, blank=True)
     advance = models.IntegerField(null=True, blank=True)
     delivery_date = models.DateField(null=True, blank=True)
     
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={ 'pk': self.pk })
+
     def __str__(self):
             return self.stamp_type

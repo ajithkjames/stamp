@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7v(p!m%m99e=bfbkh85o8of^(n^s+50*6^$0ltyfu5zakehd6l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -71,7 +71,7 @@ TEMPLATES = [
         },
     },
 ]
-
+LOGIN_URL= '/'
 WSGI_APPLICATION = 'stamp.wsgi.application'
 LOGIN_REDIRECT_URL = '/orders'
 

@@ -1,3 +1,16 @@
-nav ul li{
-	width: 100%;
+nav .brand-logo {
+	left: 10px;
+	font-family: 'Pacifico', cursive;
+}
+#dropdown1{
+	top: 56px;
+}
+.no_orders{
+	padding-top:20%;
+}
+@media screen and (max-width: 699px){
+	.no_orders{
+		padding-top:62%;
+	}
+
 }

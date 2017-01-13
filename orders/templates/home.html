@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if orders %}
+{% if object_list %}
 	<div class="container">
 	    <div class="row">
 	        <div class="jumbotron">
 	            <h1>Orders</h1>
-	            {% for order in orders %}
-	            <a href="{{order.id}}">
+	            {% for order in object_list %}
+	            <a href="{% url 'detail' order.id%}">
 	            <p>{{order.stamp_type}}&nbsp-{{order.user.first_name}}</p>
 	            {% endfor %}
 	            </a>
@@ -15,6 +15,11 @@
 	    </div>
 	</div>
 {% else %}
-	<h3>No orders yet!!</h3>
+<center>
+	<div class="no_orders">
+	<h4>You hanen't added any orders yet!!</h4>
+	<h5><a href="{% url 'create_order' %}"><i class="material-icons">add</i>Add An Order</a></h5>
+	</div>
+</center>
 {%endif%}
 {% endblock %}

@@ -17,52 +17,39 @@
 <p>Please login to see this page.</p>
     {% endif %}
 {% endif %}
+<center>
+    <div style="padding-top: 20px">
+      <img class="responsive-img" style="width: 250px;" src="http://i.imgur.com/ax0NCsK.gif" />
+      <div class="section"></div>
 
+      <h5 class="indigo-text">Please, login into your account</h5>
+      <div class="section"></div>
+    </div>
+</center>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
+        <div class="col s8 offset-s2 z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">  
+            <form method="post" action="{% url 'login' %}"  class="signin">
+                {% csrf_token %}
+                      <p><label for="id_username">Username:</label>
+                        {{ form.username }}</p>
+                        <p><label for="id_password">Password:</label>
+                        {{ form.password }}</p>
+                        <label style='float: right;padding-bottom: 40px;'>
+                                <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                        </label>
+                <p class="bs-component">
+                <div class='row'>
+                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo' value="login/">Login</button>
                 </div>
-                <div class="panel-body">
-                    <form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-
-                        <p class="bs-component">
-                            <table>
-                                <tr>
-                                    <td>{{ form.username.label_tag }}</td>
-                                    <td>{{ form.username }}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{ form.password.label_tag }}</td>
-                                    <td>{{ form.password }}</td>
-                                </tr>
-                            </table>
-                        </p>
-                        <p class="bs-component">
-                            <center>
-                                <input class="btn btn-success btn-sm" type="submit" value="login" />
-                            </center>
-                        </p>
-                        <input type="hidden" name="next" value="{{ next }}" />
-                    </form>
-                </div>
-            </div>
+                </p>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>   
         </div>
     </div>
+    <center><a href="/signup">Create account</a></center>
 </div>
-
 {% endblock %}
 
 {% block javascript %}
-
-
-<!-- <script>
-{% if not user.is_authenticated %}
-$("ul.nav.navbar-nav.navbar-right").css("display","none");
-{% endif %}
-</script> -->
-
 {% endblock %}
