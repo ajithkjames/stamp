@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if profile %}
+	<div class="container">
+	    <div class="row">
+	        <div class="jumbotron">
+	            <h1>Profile</h1>
+	        	<p>Name: {{profile.user.first_name}} &nbsp{{object.user.last_name}} </p>
+	           	<img src="{{ profile.avatar.url }}" width="250px" height="250px">
+	       		<p>{{ profile.company}}</p>
+	       		<p>{{ profile.designation}}</p>
+	       		<p>{{ profile.phone}}</p>
+	       		<p>{{ profile.address}}</p>
+
+	       		<a href="/edit-profile/{{profile.pk}}">edit profile</a>
+	           
+	        </div>
+	    </div>
+	</div>
+{% else %}
+	<h3>No data!!</h3>
+{%endif%}
+{% endblock %}

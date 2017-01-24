@@ -28,7 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-# Application definition
 
 INSTALLED_APPS = (
     'orders',
@@ -73,7 +72,7 @@ TEMPLATES = [
 ]
 LOGIN_URL= '/'
 WSGI_APPLICATION = 'stamp.wsgi.application'
-LOGIN_REDIRECT_URL = '/orders'
+LOGIN_REDIRECT_URL = '/profile'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -108,3 +107,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

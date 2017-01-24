@@ -31,12 +31,16 @@ class DateMixin(models.Model):
 class Profile(DateMixin):
 
     user = models.OneToOneField(User)
+    avatar = models.FileField()
     company = models.CharField(max_length=1000, null=True, blank=True)
     designation = models.CharField(max_length=1000, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     address = models.CharField(max_length=1000, null=True, blank=True)
-    
-    def __str__(self):              # __unicode__ on Python 2
+
+    def get_absolute_url(self):
+        return reverse('profile')
+
+    def __str__(self):         
             return self.user.username
 
 

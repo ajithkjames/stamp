@@ -4,14 +4,35 @@
 {% if object_list %}
 	<div class="container">
 	    <div class="row">
-	        <div class="jumbotron">
-	            <h1>Orders</h1>
-	            {% for order in object_list %}
-	            <a href="{% url 'detail' order.id%}">
-	            <p>{{order.stamp_type}}&nbsp-{{order.user.first_name}}</p>
-	            {% endfor %}
-	            </a>
-	        </div>
+	    <h2>My Orders</h2>
+	        <table class="responsive-table display dataTable" >
+	        <thead>
+	            <tr >
+	            	<th>User</th>
+	            	<th >Type</th>
+	            	<th>Quantity</th>
+	            	<th>Delivery Date</th>
+	        	</tr>
+	        </thead>
+			<tbody>
+		        {% for order in object_list %}
+		        <a href="{% url 'detail' order.id%}">
+		            <tr role="row" >
+		                    <td>{{order.user.first_name}}></td>
+		                    <td>{{order.stamp_type}}</td>
+		                    <td>{{order.quantity}}</td>
+		                    <td>{{order.delivery_date}}</td>
+		                    <td>
+		                    	<a href="{% url 'detail' order.id%}">
+		                    		<button class="waves-effect waves-light btn">View Order</button>
+	                    		</a>
+	                    	</td>
+		                    
+		            </tr>
+		        </a>
+		        {% endfor %}
+	        </tbody>
+	     </table>
 	    </div>
 	</div>
 {% else %}

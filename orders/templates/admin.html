@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if order %}
+	<div class="container">
+		<h2>ALL ORDERS</h2>
+		<form method="get" action="/search/">
+		   <label for="id_q">Search:</label>
+		   <div class="row">
+           <input class="col s10" type="text" name="q" id="id_q"/>
+           <input class="col s2 btn waves-effect waves-red z-depth-5 indigo" type="submit" value="Submit"/>
+           </div>
+
+        </form>
+	    <table class="responsive-table display dataTable" >
+	        <thead>
+	            <tr >
+	            	<th>User</th>
+	            	<th >Type</th>
+	            	<th class="hide-on-small-only">Quantity</th>
+	            	<th class="hide-on-small-only">Delivery Date</th>
+	        	</tr>
+	        </thead>
+			<tbody>
+		        {% for order in order %}
+		        <a href="{% url 'detail' order.id%}">
+		            <tr role="row" >
+		                    <td class="">{{order.user.first_name}}</td>
+		                    <td>{{order.stamp_type}}</td>
+		                    <td class="hide-on-small-only">{{order.quantity}}</td>
+		                    <td class="hide-on-small-only">{{order.delivery_date}}</td>
+		                    <td>
+		                    	<a href="{% url 'detail' order.id%}">
+		                    		<button class="waves-effect waves-light btn">View Order</button>
+	                    		</a>
+	                    	</td>
+		                    
+		            </tr>
+		        </a>
+		        {% endfor %}
+	        </tbody>
+	     </table>
+	     {% if order.has_other_pages %}
+		  <ul class="pagination">
+		    {% if order.has_previous %}
+		      <li><a href="?page={{ order.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+		    {% else %}
+		      <li class="disabled"><i class="material-icons">chevron_left</i></li>
+		    {% endif %}
+		    {% for i in order.paginator.page_range %}
+		      {% if order.number == i %}
+		        <li class="active"><a href="#!">{{ i }}</a></li>
+		        
+		      {% else %}
+		        <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+		        
+		      {% endif %}
+		    {% endfor %}
+		    {% if order.has_next %}
+		      <li><a href="?page={{ order.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+		    {% else %}
+		      <li class="disabled"><i class="material-icons">chevron_right</i></li>
+		    {% endif %}
+		  </ul>
+		{% endif %}
+	</div>
+	
+{% else %}
+	<center>
+		<div class="no_orders">
+		<h4>You hanen't added any orders yet!!</h4>
+		<h5><a href="{% url 'create_order' %}"><i class="material-icons">add</i>Add An Order</a></h5>
+		</div>
+	</center>
+{%endif%}
+{% endblock %}

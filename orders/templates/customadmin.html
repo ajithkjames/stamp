@@ -1,0 +1,18 @@
+<style>
+	.no-padding {
+		display: none;
+	}
+</style>
+{% extends "admin/index.html" %}
+{% block back_link %}
+    {{block.super}}
+    <li ><a class="collapsible-header" href="/admin-home"><i class="material-icons">arrow_back</i>View site</a></li>
+	<li>
+	    <ul class="collapsible collapsible-accordion">
+	        <li>
+	            <a class="collapsible-header" href="/admin-home"><i class="material-icons">view_list</i> All Orders</a>
+	        </li>
+	    </ul>           
+    </li>
+{% endblock %}
+

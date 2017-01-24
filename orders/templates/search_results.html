@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if found_entries %}
+	<div class="container">
+		<h2>RESULTS</h2>
+		<form method="get" action="/search/">
+          
+
+<label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Submit"/>
+
+
+        </form>
+	    <table class=" display dataTable" >
+	        <thead>
+	            <tr >
+	            	<th>Name</th>
+	            	<th >Type</th>
+	            	<th class="hide-on-small-only">Quantity</th>
+	            	<th class="hide-on-small-only">Delivery Date</th>
+	        	</tr>
+	        </thead>
+			<tbody>
+		        {% for order in found_entries %}
+		        <a href="{% url 'detail' order.id%}">
+		            <tr role="row" >
+		                    <td class=""><a href="{% url 'detail' order.id%}">{{order.user.first_name}}<a href="{% url 'detail' order.id%}"></td>
+		                    <td>{{order.stamp_type}}</td>
+		                    <td>{{order.quantity}}</td>
+		                    <td>{{order.delivery_date}}</td>
+		                    
+		            </tr>
+		        </a>
+		        {% endfor %}
+	        </tbody>
+	     </table>
+	     
+	</div>
+	
+{% else %}
+	<center>
+		<div class="no_orders">
+		<h4>No Results Found!!</h4>
+		<a href="/admin-home">
+		<button class="btn waves-effect waves-red z-depth-5 indigo">GO BAck</button>
+		</a>
+		</div>
+	</center>
+{%endif%}
+{% endblock %}
