@@ -18,7 +18,7 @@
 		        {% for order in object_list %}
 		        <a href="{% url 'detail' order.id%}">
 		            <tr role="row" >
-		                    <td>{{order.user.first_name}}></td>
+		                    <td>{{order.user.first_name}}</td>
 		                    <td>{{order.stamp_type}}</td>
 		                    <td>{{order.quantity}}</td>
 		                    <td>{{order.delivery_date}}</td>
