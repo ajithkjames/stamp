@@ -14,3 +14,11 @@ nav .brand-logo {
 	}
 
 }
+.sticky{
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+.space{
+	margin-top: 67px;
+}

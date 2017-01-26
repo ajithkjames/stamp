@@ -2,7 +2,8 @@
 
 {% block content %}
 {% if order %}
-	<div class="container">
+<div class="space">
+	<div class="container space">
 		<h2>ALL ORDERS</h2>
 		<form method="get" action="/search/">
 		   <label for="id_q">Search:</label>
@@ -64,7 +65,7 @@
 		  </ul>
 		{% endif %}
 	</div>
-	
+</div>	
 {% else %}
 	<center>
 		<div class="no_orders">
