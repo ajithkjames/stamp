@@ -24,6 +24,7 @@
                           <ul class="right hide-on-med-and-down">
                             <li><a href="{% url 'create_order' %}"><i class="material-icons left">add</i>Add Order</a></li>
                             {% if request.user.is_superuser %}
+                            <li><a href="/orders/export"><i class="material-icons left">description</i>Export Orders</a></li>
                             <li><a href="/admin-home"><i class="material-icons left">view_list</i>All Orders</a></li>
                             {% endif %}
                             <li><a href="/orders"><i class="material-icons left">view_list</i>My Orders</a></li>
@@ -35,6 +36,7 @@
                             <li><a href="/orders"><i class="material-icons left">view_list</i>My Orders</a></li>
                             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
                             {% if request.user.is_superuser %}
+                            <li><a href="/orders/export"><i class="material-icons left">description</i>Export Orders</a></li>
                             <li><a href="/admin-home"><i class="material-icons left">view_list</i>All Orders</a></li>
                             <li><a href="/admin"><i class="material-icons left">perm_identity</i>Admin Panel</a></li>
                             {% else %}

@@ -14,6 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
 from django.db.models import Q
 from django.template import RequestContext
+import csv
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -205,3 +206,16 @@ def search(request):
 
     return render(request,'search_results.html',
                           { 'query_string': query_string, 'found_entries': found_entries })
+
+def export_users_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="orders.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['user','stamp_type', 'font', 'color'])
+
+    users = OrderDetail.objects.all().values_list('user__first_name','stamp_type', 'font', 'color')
+    for user in users:
+        writer.writerow(user)
+
+    return response
