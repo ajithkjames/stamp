@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = (
-    'orders',
     'material',
     'material.frontend',
     'material.admin',
@@ -40,6 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
+    'easy_pdf',
+    'orders',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'stamp.urls'
@@ -66,11 +69,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',  
+                'social.apps.django_app.context_processors.login_redirect', 
             ],
         },
     },
 ]
 LOGIN_URL= '/'
+LOGOUT_URL = 'logout'
 WSGI_APPLICATION = 'stamp.wsgi.application'
 LOGIN_REDIRECT_URL = '/profile'
 
@@ -114,4 +120,38 @@ MEDIA_URL = '/media/'
 FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                         "django_excel.TemporaryExcelFileUploadHandler")
 
-SENDSMS_BACKEND = 'myapp.mysmsbackend.SmsBackend'
+AUTHENTICATION_BACKENDS = (
+    'social.backends.github.GithubOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',  # <--- enable this one
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+
+SOCIAL_AUTH_GITHUB_KEY = 'c3241ae3925d11021416'
+SOCIAL_AUTH_GITHUB_SECRET = '2724e28ee7b474a3e85605b86b1e849b3a026f2d'
+
+SOCIAL_AUTH_TWITTER_KEY = 'B3ESqgGb0BfIpKj2nPhwn9CT1'
+SOCIAL_AUTH_TWITTER_SECRET = 'QD3gU0mDDkkIonTwIp4oYeyGMHzxLVMUSb2FRmSRCXehSO2Bsp'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1402590553109028'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'aa6be44952511e7dae6c1591f14210e3'  # App Secret
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '285454844424-o3t5mqosuhbosg7cu08pcefdgjis0489.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'y2T_7bnJUwUVNufWA6N6uwAX'

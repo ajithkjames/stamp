@@ -15,6 +15,7 @@ import re
 from django.db.models import Q
 from django.template import RequestContext
 import csv
+from easy_pdf.views import PDFTemplateView
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -219,3 +220,13 @@ def export_users_csv(request):
         writer.writerow(user)
 
     return response
+
+class HelloPDFView(PDFTemplateView):
+    template_name = "hello.html"
+
+    def get_context_data(self, **kwargs):
+        return super(HelloPDFView, self).get_context_data(
+            pagesize="A4",
+            title="Hi there!",
+            **kwargs
+        )
